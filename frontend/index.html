@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>WeatherGPT – Your AI Weather Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside>
+            <div class="logo"><span style="font-size:36px">☁️</span>
+                <div><b>Weather<i>GPT</i></b><small>Your AI Weather Assistant</small></div>
+            </div>
+            <button class="nav on" data-p="home">🏠 Home</button>
+            <button class="nav" data-p="chat">💬 Chat</button>
+            <button class="nav" data-p="map">🗺️ Weather Map</button>
+            <button class="nav" data-p="forecast">📅 Forecast</button>
+            <button class="nav" data-p="alerts">⚠️ Alerts</button>
+            <button class="nav" data-p="climate">📊 Climate Insights</button>
+            <button class="nav" data-p="saved">📍 Saved Locations</button>
+            <button class="nav" data-p="settings">⚙️ Settings</button>
+            <div class="sp"></div>
+            <select aria-label="Language">
+                <option>🌐 English</option>
+                <option>हिन्दी</option>
+                <option>ਪੰਜਾਬੀ</option>
+            </select>
+            <div class="user">
+                <div class="av">W</div>
+                <div><b>weather</b><small>weathergpt@example.com</small></div>
+            </div>
+        </aside>
+        <main>
+            <header>
+                <input id="search" placeholder="Search for a city, state or ask a question..." aria-label="Search">
+                <div class="hr"><span>📍 <span id="hloc">Phagwara, Punjab</span></span><button class="ib"
+                        aria-label="Notifications">🔔</button><button class="ib" id="theme"
+                        aria-label="Toggle theme">☀️</button>
+                    <div class="av">A</div>
+                </div>
+            </header>
+
+            <div id="home" class="pg on">
+                <div class="grid">
+                    <div>
+                        <section class="card hero">
+                            <h2 id="hcity">Phagwara, Punjab</h2>
+                            <div class="dt" id="hdate">—</div>
+                            <div class="row">
+                                <div>
+                                    <div class="temp"><span class="i" id="hicon">⛅</span><span id="htemp">–</span></div>
+                                    <div style="margin-top:8px;font-size:18px" id="hcond">Loading…</div>
+                                </div>
+                                <div class="stats">
+                                    <div><small>Feels like</small><b id="hf">–</b></div>
+                                    <div><small>Humidity</small><b id="hh">–</b></div>
+                                    <div><small>Wind</small><b id="hw">–</b></div>
+                                    <div><small>Pressure</small><b id="hp">–</b></div>
+                                    <div><small>Visibility</small><b id="hv">–</b></div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="fc">
+                            <div id="hourly"></div>
+                            <div class="d" id="daily"></div>
+                        </div>
+                        <section class="card ask" id="askcard">
+                            <div class="ah">
+                                <div class="bot">🤖</div>
+                                <div style="flex:1">
+                                    <h3>Ask WeatherGPT</h3>
+                                    <p>Get real-time weather information, forecasts, alerts and more using natural
+                                        language.</p>
+                                </div><select id="newchat">
+                                    <option>New Chat</option>
+                                </select>
+                            </div>
+                            <div class="chips" id="chips"></div>
+                            <div class="log" id="log"></div>
+                            <div class="box"><textarea id="q" placeholder="Type your question here..."></textarea>
+                                <div class="bar"><button class="ib" aria-label="Image">🖼️</button><button class="ib"
+                                        aria-label="Voice">🎤</button><button class="ib"
+                                        aria-label="Location">📍</button><span style="flex:1"></span><select>
+                                        <option>English</option>
+                                        <option>हिन्दी</option>
+                                    </select><button class="send" id="send" aria-label="Send">➤</button></div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="side">
+                        <section class="card">
+                            <div class="ch">
+                                <h3>⚠️ Weather Alerts</h3><a data-go="alerts">View All ›</a>
+                            </div>
+                            <div id="alertlist"></div>
+                        </section>
+                        <section class="card">
+                            <div class="ch">
+                                <h3>🗺️ Weather Map</h3><a data-go="map">View Full Map ›</a>
+                            </div>
+                            <div class="map"><span style="left:28%;top:6%">Lahore</span><span
+                                    style="left:34%;top:20%">New Delhi</span><span
+                                    style="left:48%;top:36%">Lucknow</span><span
+                                    style="left:4%;top:42%">Ahmedabad</span><span
+                                    style="left:42%;top:52%;font-size:16px;font-weight:600">India</span><span
+                                    style="left:8%;top:62%">Mumbai</span><span
+                                    style="left:38%;top:68%">Hyderabad</span><span
+                                    style="left:30%;top:90%">Bengaluru</span>
+                                <div class="zoom"><button>+</button><button>−</button></div>
+                            </div>
+                        </section>
+                        <section class="card">
+                            <div class="ch">
+                                <h3>📍 Popular Locations</h3><a data-go="saved">Manage ›</a>
+                            </div>
+                            <div class="pop" id="pop"></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat" class="pg">
+                <section class="card">
+                    <h3>💬 Chat</h3>
+                    <p style="color:var(--mu)">Use the Ask WeatherGPT box on Home to start a conversation.</p><button
+                        class="chip" data-go="home">Go to Home</button>
+                </section>
+            </div>
+            <div id="map" class="pg">
+                <section class="card">
+                    <h3>🗺️ Weather Map</h3>
+                    <div class="map" style="height:480px"></div>
+                </section>
+            </div>
+            <div id="forecast" class="pg">
+                <section class="card">
+                    <h3>📅 5-Day Forecast</h3>
+                    <div class="d fc" style="grid-template-columns:1fr">
+                        <div id="daily2" style="background:none"></div>
+                    </div>
+                </section>
+            </div>
+            <div id="alerts" class="pg">
+                <section class="card">
+                    <h3>⚠️ All Alerts</h3>
+                    <div id="alertlist2"></div>
+                </section>
+            </div>
+            <div id="climate" class="pg">
+                <section class="card">
+                    <h3>📊 Climate Insights</h3>
+                    <p style="color:var(--mu)">Average August high: 34°C. Monsoon rainfall typically peaks in the first
+                        half of the month.</p>
+                </section>
+            </div>
+            <div id="saved" class="pg">
+                <section class="card">
+                    <h3>📍 Saved Locations</h3>
+                    <div class="pop" id="pop2"></div>
+                </section>
+            </div>
+            <div id="settings" class="pg">
+                <section class="card">
+                    <h3>⚙️ Settings</h3><label>Units: <select id="unit">
+                            <option value="C">Celsius (°C)</option>
+                            <option value="F">Fahrenheit (°F)</option>
+                        </select></label>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
